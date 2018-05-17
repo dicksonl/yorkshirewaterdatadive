@@ -3,16 +3,17 @@ import pandas as pd
 import timeit
 import numpy
 
-# dateparse = lambda x, y: pd.to_datetime(x + ' ' + y)
+dateparse = lambda x, y: pd.to_datetime(x + ' ' + y)
 
-# propertyCount = pd.read_csv("./data/DMA_Property Count_2016_2017.csv")
+propertyCount = pd.read_csv("./data/DMA_Property Count_2016_2017.csv")
+postCodes = pd.read_csv("./data/postcode.csv")
 
 # dataw1 = pd.read_csv("./data/W1_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # dataw2 = pd.read_csv("./data/W2_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # dataw3 = pd.read_csv("./data/W3_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # dataw4 = pd.read_csv("./data/W4_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # dataw5 = pd.read_csv("./data/W5_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
-#
+
 # datan1 = pd.read_csv("./data/N1_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # datan2 = pd.read_csv("./data/N2_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # datan3 = pd.read_csv("./data/N3_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
@@ -30,14 +31,28 @@ import numpy
 # datae3 = pd.read_csv("./data/E3_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # datae4 = pd.read_csv("./data/E4_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
 # datae5 = pd.read_csv("./data/E5_2016_2017.csv", parse_dates={'Datetime': ['Date', 'Time']}, date_parser=dateparse, keep_date_col=True)
-#
+
 # allCsvs = pd.concat([datae1,datae2,datae3,datae4,datae5,
 #                  datan1,datan2,datan3,datan4,datan5,
 #                  datas1,datas2,datas3,datas4,datas5,
 #                  dataw1,dataw2,dataw3,dataw4,dataw5])
+
+# westRegion = pd.concat([dataw1,dataw2,dataw3,dataw4,dataw5]);
+
+# westRegion = pd.read_csv("./data/west.csv")
 #
-# mergedWithPropertyData = pd.merge(allCsvs, propertyCount, on='DMA')
+# mergedWithPropertyData = pd.merge(westRegion, propertyCount, on='DMA')
 #
+# mergedWithPostCode = pd.merge(mergedWithPropertyData, postCodes, on='DMA')
+#
+# mergedWithPostCode.to_csv("./data/west_processed.csv")
+
+df = pd.read_csv("./data/west_processed.csv")
+
+del df['Unnamed: 0']
+
+df.to_csv("./data/west_processed.csv")
+
 # mergedWithPropertyData.to_pickle("./data/all")
 
 # df = pd.read_pickle("./data/all")
